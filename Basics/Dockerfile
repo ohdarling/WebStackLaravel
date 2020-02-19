@@ -20,7 +20,7 @@ RUN apk update -qq \
 	&& apk upgrade \
 	&& apk add --no-cache tini \
 	   curl composer \
-       php-pdo php-fileinfo  php-tokenizer php-gd php-dom  php-xmlwriter php-xml php-pdo_mysql php-session \
+       php-pdo php-fileinfo  php-tokenizer php-gd php-dom  php-xmlwriter php-xml php-pdo_mysql php-session php-simplexml \
     && rm -rf /var/cache/apk/*
     
 RUN mkdir -p ${WSL_INSTALL_DIR}
