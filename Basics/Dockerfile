@@ -26,6 +26,7 @@ RUN apk update -qq \
 
 RUN curl -L --silent  ${DOWNLOAD_URL} | tar -xz --strip-components=1 -C "${INSTALL_DIR}" 
 RUN cd ${INSTALL_DIR} 
+RUN pwd && ls
 RUN composer install  
 RUN cp .env.example .env 
 RUN chown -R ${RUN_USER}:${RUN_GROUP} ${INSTALL_DIR}
