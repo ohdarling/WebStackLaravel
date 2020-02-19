@@ -24,12 +24,12 @@ RUN apk update -qq \
     && rm -rf /var/cache/apk/* \
     && mkdir -p ${INSTALL_DIR}
 
-RUN curl -L --silent  ${DOWNLOAD_URL} | tar -xz --strip-components=1 -C "${INSTALL_DIR}" \
-    && cd ${INSTALL_DIR} \
-    && composer install  \
-    && cp .env.example .env \
-    && chown -R ${RUN_USER}:${RUN_GROUP} ${INSTALL_DIR}\
-    && chown -R ${RUN_USER}:${RUN_GROUP} /entrypoint.sh
+RUN curl -L --silent  ${DOWNLOAD_URL} | tar -xz --strip-components=1 -C "${INSTALL_DIR}" 
+RUN cd ${INSTALL_DIR} 
+RUN composer install  
+RUN cp .env.example .env 
+RUN chown -R ${RUN_USER}:${RUN_GROUP} ${INSTALL_DIR}
+RUN chown -R ${RUN_USER}:${RUN_GROUP} /entrypoint.sh
 
 WORKDIR ${INSTALL_DIR}
 CMD ["/entrypoint.sh", "serve"]
