@@ -27,10 +27,7 @@ RUN mkdir -p ${WSL_INSTALL_DIR}
 RUN curl -L  ${DOWNLOAD_URL} | tar -xz --strip-components=1 -C "${WSL_INSTALL_DIR}" 
 RUN echo install dir ${WSL_INSTALL_DIR}
 RUN ls ${WSL_INSTALL_DIR}
-RUN cd ${WSL_INSTALL_DIR}
-RUN pwd && ls
-RUN composer install  
-RUN cp .env.example .env 
+RUN cd ${WSL_INSTALL_DIR} && pwd && ls && composer install && cp .env.example .env 
 RUN chown -R ${RUN_USER}:${RUN_GROUP} ${WSL_INSTALL_DIR}
 RUN chown -R ${RUN_USER}:${RUN_GROUP} /entrypoint.sh
 
