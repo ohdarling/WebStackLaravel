@@ -3,13 +3,13 @@ LABEL "Mail":"arvon2014@gmail.com"\
       "version":"v1.2.6"
 ENV RUN_USER daemon 
 ENV RUN_GROUP daemon
-ENV INSTALL_DIR /opt/navi
+ENV WSL_INSTALL_DIR=/opt/navi
 ENV DB_HOST 127.0.0.1
 ENV DB_PORT 3306
 ENV DB_DATABASE homestead
 ENV DB_USERNAME homestead
 ENV DB_PASSWORD secret
-ENV LOGIN_COPTCHA true 
+ENV LOGIN_COPTCHA false 
 
 ARG WEBSTACK_VERSION=v1.2.6
 ARG DOWNLOAD_URL=https://github.com/hui-ho/WebStack-Laravel/archive/${WEBSTACK_VERSION}.tar.gz
@@ -21,11 +21,12 @@ RUN apk update -qq \
 	&& apk add --no-cache tini \
 	   curl composer \
        php-pdo php-fileinfo  php-tokenizer php-gd php-dom  php-xmlwriter php-xml php-pdo_mysql php-session \
-    && rm -rf /var/cache/apk/* \
-    && mkdir -p ${INSTALL_DIR}
-
-RUN curl -L --silent  ${DOWNLOAD_URL} | tar -xz --strip-components=1 -C "${INSTALL_DIR}" 
-RUN cd ${INSTALL_DIR} 
+    && rm -rf /var/cache/apk/*
+    
+RUN mkdir -p ${WSL_INSTALL_DIR}
+RUN curl -L  ${DOWNLOAD_URL} | tar -xz --strip-components=1 -C "${WSL_INSTALL_DIR}" 
+RUN echo install dir ${WSL_INSTALL_DIR} 
+RUN cd ${WSL_INSTALL_DIR} 
 RUN pwd && ls
 RUN composer install  
 RUN cp .env.example .env 
